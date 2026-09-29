@@ -1,0 +1,29 @@
+== Demo environment ==
+exact budget=15: status=optimal plan=['to_s2', 'merge', 'goal'] cost=6 proven=True real_calls=13 cache_hits=0
+exact budget=4 : status=infeasible proven=True real_calls=6 (infeasibility proof)
+
+== Layered environment (layers=6, width=4) ==
+oracle budget=100: status=optimal optimal_cost=6 plan=['f0', 'f1', 'f2', 'f2', 'f0'] real_calls=74 states_settled=20
+execution budget=14; seeds=20
+call_budget | found | optimal | mean_cost | worst_gap | mean_real_calls
+          8 | 0.050 |   0.000 |      11.0 |         5 | 9.55
+         16 | 0.050 |   0.000 |      11.0 |         5 | 17.2
+         24 | 0.200 |   0.000 |      12.0 |         8 | 25.1
+         32 | 0.200 |   0.000 |      12.0 |         8 | 32.7
+         44 | 0.500 |   0.000 |      11.3 |         8 | 44.35
+         56 | 0.700 |   0.000 |    10.857 |         7 | 56.55
+         74 | 1.000 |   0.050 |      8.85 |         5 | 74.1
+invalid plans returned by UCT: 0 (must be 0)
+
+== Exact solver as oracle across execution budgets (layered) ==
+budget=  4: infeasible cost=None calls=35 settled=8 proven=True
+budget=  5: infeasible cost=None calls=54 settled=12 proven=True
+budget=  6:    optimal cost=6 calls=74 settled=20 proven=True
+budget=  7:    optimal cost=6 calls=74 settled=20 proven=True
+budget=  8:    optimal cost=6 calls=74 settled=20 proven=True
+budget=  9:    optimal cost=6 calls=74 settled=20 proven=True
+
+== Counterexample: de-duplicating by environment state alone ==
+state-only dedup : found=False plan=None (WRONG: feasible plan exists)
+(state,remaining): found=True plan=['cheap', 'go'] cost=7
+exact oracle     : status=optimal plan=['cheap', 'go'] cost=7
